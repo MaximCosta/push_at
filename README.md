@@ -9,16 +9,30 @@ Before using this script, ensure that you have the following:
 - Python 3 installed on your system.
 - Git installed and configured on your system.
 
+## Installation
+
+To install the script, you can use the following command:
+
+```shell
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/MaximCosta/push_at/main/install.sh)"
+```
+
+The installation script will perform the following steps:
+
+- Clone the repository containing the script.
+- Install any necessary dependencies (optional).
+- Make the script executable.
+- Create a symbolic link to make the script accessible globally.
+
 ## Usage
 
 To use the script, follow these steps:
 
-1. Copy the code into a file named `commit_with_date.py`.
-2. Open a terminal or command prompt and navigate to the directory where the `commit_with_date.py` file is located.
-3. Run the script using the following command:
+1. Open a terminal or command prompt.
+2. Run the following command to commit and push changes with a specified date and time:
 
-   ```
-   python3 commit_with_date.py [-a ADD] [-m MESSAGE] [-d DATE]
+   ```shell
+   fpush [-a ADD] [-m MESSAGE] [-d DATE]
    ```
 
    The script accepts the following optional arguments:
@@ -27,9 +41,9 @@ To use the script, follow these steps:
    - `-m MESSAGE, --message MESSAGE`: The commit message. If not provided, the default is set to "Update".
    - `-d DATE, --date DATE`: The date and time for the commit. Use the format `YYYY-MM-DD HH:MM:SS`. If not provided, the default is the current date and time.
 
-   Note: Make sure to replace `python3` with the appropriate command if `python3` is not recognized on your system.
+   Note: Make sure to replace `fpush` with the appropriate command if you chose a different name during the installation.
 
-4. The script will execute the following steps:
+3. The script will execute the following steps:
    - Adds the specified files or all files (`.`) to the Git staging area using `git add`.
    - Sets the commit date and author date to the specified date or the current date and time.
    - Commits the changes with the provided commit message using `git commit`.
@@ -43,20 +57,20 @@ Here are some examples of how to use the script:
 
 - Commit and push all files with the default commit message and the current date and time:
 
-  ```
-  python3 commit_with_date.py
+  ```shell
+  fpush
   ```
 
 - Commit and push all files with a custom commit message and the current date and time:
 
-  ```
-  python3 commit_with_date.py -m "Fix bug"
+  ```shell
+  fpush -m "Fix bug"
   ```
 
 - Commit and push a specific file with a custom commit message and date:
 
-  ```
-  python3 commit_with_date.py -a myfile.txt -m "Add myfile.txt" -d "2023-06-05 14:30:00"
+  ```shell
+  fpush -a myfile.txt -m "Add myfile.txt" -d "2023-06-05 14:30:00"
   ```
 
 Note: If you encounter any errors or have issues using the script, please refer to the error messages displayed or seek assistance.
