@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 def argsError(e):
-    print(f"[Error] - {e}")
+    print(f"\033[31m[Error] - {e}\033[0m")
     exit(0)
 
 
@@ -22,7 +22,14 @@ def push_with_date(commit_add: str, commit_message: str, commit_date: datetime) 
     os.system("git push")
 
 
+def check_current_directory() -> None:
+    if not os.path.isdir(".git"):
+        argsError("Not a git repository")
+
+
 def main() -> None:
+    check_current_directory()
+
     parser = argparse.ArgumentParser()
     parser.add_argument("-a", "--add", help="git Add option (default: .)")
     parser.add_argument("-m", "--message", help='Commit message (default: "Update")')
