@@ -42,7 +42,7 @@ def main() -> None:
         commit_date = datetime.strptime(args.date, "%Y-%m-%d %H:%M:%S") if args.date else datetime.today()
         push_with_date(commit_add, commit_message, commit_date)
     except ValueError:
-        argsError("Invalid date format. Please use YYYY-MM-DD HH:MM:SS.")
+        argsError("Invalid date format. Please use \"YYYY-MM-DD HH:MM:SS\".")
 
 
 if __name__ == "__main__":
