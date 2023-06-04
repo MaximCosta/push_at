@@ -13,7 +13,7 @@ if ! [ -x "$(command -v python3)" ]; then
 fi
 
 # Create a md5sum of online script
-md5sum_online=$(curl -sSfL https://raw.githubusercontent.com/MaximCosta/push_at/main/commit_with_date.py | md5sum | awk '{print $1}')
+md5sum_online=$(curl -sSfL -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/MaximCosta/push_at/main/commit_with_date.py | md5sum | awk '{print $1}')
 
 # Create a md5sum of local script if it exists (~/.local/bin/fpush)
 local_script_path="$HOME/.local/bin/fpush"
@@ -30,7 +30,7 @@ if [ "$md5sum_online" == "$md5sum_local" ]; then
 fi
 
 # Download script
-curl -sSfL https://raw.githubusercontent.com/MaximCosta/push_at/main/commit_with_date.py -o "$local_script_path" >/dev/null 2>&1
+curl -sSfL -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/MaximCosta/push_at/main/commit_with_date.py -o "$local_script_path" >/dev/null 2>&1
 
 # Check if script is downloaded
 if [ -f "$local_script_path" ]; then
