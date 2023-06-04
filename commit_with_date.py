@@ -32,7 +32,7 @@ def main() -> None:
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-a", "--add", help="git Add option (default: .)")
-    parser.add_argument("-m", "--message", help='Commit message (default: "Update")')
+    parser.add_argument("-m", "--message", help='Commit message (default: "Upadte project")')
     parser.add_argument("-d", "--date", help="Date and time for the commit (format: YYYY-MM-DD HH:MM:SS) (default: current date and time)")
     args = parser.parse_args()
 
