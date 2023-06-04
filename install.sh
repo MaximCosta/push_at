@@ -1,18 +1,51 @@
 #!/bin/bash
 
-# Clone the repository
-git clone https://github.com/MaximCosta/push_at
-cd push_at
+# Check if git is installed and install it if not
+if ! [ -x "$(command -v git)" ]; then
+    echo "Git is not installed. Installing..."
+    sudo apt-get install git
+fi
 
-# Install dependencies (optional)
-pip install -r requirements.txt
+# Check if python 3 is installed and install it if not
+if ! [ -x "$(command -v python3)" ]; then
+    echo "Python 3 is not installed. Installing..."
+    sudo apt-get install python3
+fi
 
-# Make the script executable
-chmod +x commit_with_date.py
+# Create a md5sum of online script
+wget https://raw.githubusercontent.com/MaximCosta/push_at/main/commit_with_date.py -O /tmp/commit_with_date.py >/dev/null 2>&1
+md5sum_online=$(md5sum /tmp/commit_with_date.py | awk '{print $1}')
+rm /tmp/commit_with_date.py
 
-# Create a symbolic link to make the script accessible globally
-ln -s "$(pwd)/commit_with_date.py" /usr/local/bin/fpush
+# Create a md5sum of local script if it exists (~/.local/bin/fpush)
+local_script_path="$HOME/.local/bin/fpush"
+if [ -f "$local_script_path" ]; then
+    md5sum_local=$(md5sum "$local_script_path" | awk '{print $1}')
+else
+    md5sum_local="0"
+fi
+
+# Check if local script is up to date
+if [ "$md5sum_online" == "$md5sum_local" ]; then
+    echo "Script is up to date."
+    exit 0
+fi
+
+# Download script
+wget https://raw.githubusercontent.com/MaximCosta/push_at/main/commit_with_date.py -O "$local_script_path" >/dev/null 2>&1
+
+# Check if script is downloaded
+if [ -f "$local_script_path" ]; then
+    echo "Script downloaded successfully."
+else
+    echo "Script download failed."
+    exit 1
+fi
+
+chmod +x "$local_script_path"
 
 # Display installation success message
 echo "Installation completed successfully."
-echo "You can now use the 'commit_with_date' command to execute the script."
+echo "You can now use the 'fpush' command to execute the script."
+echo ""
+fpush -h
