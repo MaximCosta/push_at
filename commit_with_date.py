@@ -38,7 +38,7 @@ def main() -> None:
 
     try:
         commit_add = args.add if "add" in args else "."
-        commit_message = args.message if args.message else "Update"
+        commit_message = args.message if args.message else "Update project"
         commit_date = datetime.strptime(args.date, "%Y-%m-%d %H:%M:%S") if args.date else datetime.today()
         push_with_date(commit_add, commit_message, commit_date)
     except ValueError:
