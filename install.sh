@@ -30,6 +30,13 @@ if [ "$md5sum_online" == "$md5sum_local" ]; then
 fi
 
 # Download script
+if [ ! -e "$HOME/.local/bin" ]; then
+    mkdir -p "$HOME/.local/bin"
+    echo "Write export=$HOME/.local/bin:\$PATH in .zshrc or .bashrc"
+    echo "echo export PATH=\\\"$HOME/.local/bin:\\\$PATH\\\" >> \"$HOME/.zshrc\""
+    echo "echo export PATH=\\\"$HOME/.local/bin:\\\$PATH\\\" >> \"$HOME/.bashrc\""
+fi
+
 curl -sSfL -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/MaximCosta/push_at/main/commit_with_date.py -o "$local_script_path" >/dev/null 2>&1
 
 # Check if script is downloaded
